@@ -6,6 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1 {
+            float: left;
+        }
+
+        img {
+            float: right;
+            width: 150px; 
+            margin-left: 20px; 
+        }
+
+        .absolute-paragraph {
+            position: absolute;
+            top: 45px;
+            left: 0px;
+            padding: 10px;
+        }
+
+        #content {
+            clear: both; 
+        }
         #customers {
           font-family: Arial, Helvetica, sans-serif;
           border-collapse: collapse;
@@ -61,24 +85,34 @@
     </style>
 </head>
 <body>
+  <div id="content">
     <h1>Hola mundo</h1>
-    <p>Mi primera chamba</p>
-    <table id="customers">
-      <tr>
-        <th>Nombre</th>
-        <th>Color</th>
-        <th>Comida</th>
-      </tr>
-      <tr>
-        <td>Daniel Chanci</td>
-        <td>Negro</td>
-        <td>Pizza</td>
-      </tr>
-      <tr>
-        <td>Sebastián Moreno</td>
-        <td>Lila</td>
-        <td>Frijoles</td>
-      </tr>
-    </table>
+    <img src="https://img.freepik.com/free-photo/lovely-pet-portrait-isolated_23-2149192357.jpg?w=996&t=st=1707691798~exp=1707692398~hmac=aa0ec2d06aee8efbabab995c14b171edd7bcadb9f1b182e1821af39f3321f8c2" alt="perrito">
+  </div>
+  <br>
+  <br>
+  <p class="absolute-paragraph" >Mi primera chamba</p>
+  <table id="customers">
+    <tr>
+      <th>Nombre</th>
+      <th>Color</th>
+      <th>Comida</th>
+    </tr>
+    <tr>
+      <td>Daniel Chanci</td>
+      <td>Negro</td>
+      <td>Pizza</td>
+    </tr>
+    <tr>
+      <td>Sebastián Moreno</td>
+      <td>Lila</td>
+      <td>Frijoles</td>
+    </tr>
+    <tr>
+      <td>Luis Altamar</td>
+      <td>Verde</td>
+      <td>Salchipapa Costeña</td>
+    </tr>
+  </table>
 </body>
 </html>

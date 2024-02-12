@@ -10,25 +10,28 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        h1 {
-            float: left;
-        }
-
-        img {
-            float: right;
+        .header-img {
             width: 150px; 
-            margin-left: 20px; 
         }
 
-        .absolute-paragraph {
-            position: absolute;
-            top: 45px;
-            left: 0px;
-            padding: 10px;
+        #header {
+            margin-bottom: 20px;
+            display: inline-block;
+            width: 100%;
+            border: 5px dashed royalblue;
         }
 
-        #content {
-            clear: both; 
+        .banner {
+              float: right;
+        }
+
+        .img-container {
+          border: 2px solid blueviolet;
+          margin-bottom: 20px;
+        }
+
+        .img-container img {
+          margin-left: 5px;
         }
         #customers {
           font-family: Arial, Helvetica, sans-serif;
@@ -85,13 +88,17 @@
     </style>
 </head>
 <body>
-  <div id="content">
+  <div id="header">
     <h1>Hola mundo</h1>
-    <img src="https://img.freepik.com/free-photo/lovely-pet-portrait-isolated_23-2149192357.jpg?w=996&t=st=1707691798~exp=1707692398~hmac=aa0ec2d06aee8efbabab995c14b171edd7bcadb9f1b182e1821af39f3321f8c2" alt="perrito">
+    <div class="banner">
+      <img class="header-img" src="https://img.freepik.com/free-photo/lovely-pet-portrait-isolated_23-2149192357.jpg?w=996&t=st=1707691798~exp=1707692398~hmac=aa0ec2d06aee8efbabab995c14b171edd7bcadb9f1b182e1821af39f3321f8c2" alt="perrito">
+      <span>Mi primera chamba</span>
+    </div>
   </div>
-  <br>
-  <br>
-  <p class="absolute-paragraph" >Mi primera chamba</p>
+  <div class="img-container">
+    <h3>Aquí van las imágenes</h3>
+    <img src="https://i.pinimg.com/236x/44/87/d9/4487d9f8952af5538ca34ddf06a09d5c.jpg">
+  </div>
   <table id="customers">
     <tr>
       <th>Nombre</th>
@@ -119,6 +126,5 @@
       <td>Caracoles</td>
     </tr>
   </table>
-  <img src="https://i.pinimg.com/236x/44/87/d9/4487d9f8952af5538ca34ddf06a09d5c.jpg">
 </body>
 </html>

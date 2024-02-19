@@ -1,0 +1,20 @@
+h1 {
+    color: goldenrod !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#box-container {
+    width: 80%;
+    border: 3px solid red;
+    border-radius: 30%;
+    margin: 10px 50px 0px 40px;
+    padding: 5px 100px;
+    text-align: center;
+}
+
+.box {
+    display: inline-block;
+    border: 1px solid black;
+    margin: 0 0px;
+}
+

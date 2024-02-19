@@ -1,0 +1,30 @@
+body {
+    background-color: gainsboro;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+section {
+    background-color: #00304e;
+    width: 90%;
+    height: 500px;
+    margin: 0 auto;
+    border: 5px solid blue;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#container div {
+    width: 100px;
+    height: 100px;
+    flex: 40px 1 0;
+}
+
+div:nth-child(5) {
+    align-self:flex-end;
+    flex-grow: 50;
+}

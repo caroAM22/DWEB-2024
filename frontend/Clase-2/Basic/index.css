@@ -1,0 +1,46 @@
+* {
+    color: darkorchid;
+}
+body {
+    background-color: aqua;
+}
+p {
+    font-size: 30px;
+    font-weight: 900;
+}
+
+h1 {
+    color: rgba(20, 70, 189, 1);
+    text-decoration: line-through;
+}
+
+#main-title {
+    color:violet;
+    background-color: rosybrown;
+}
+
+.content {
+    float:right;
+}
+
+.content.map {
+    background-color: springgreen;
+}
+
+div.content span.text {
+    color: red;
+}
+
+a:hover {
+    color: darkred;
+    transition: 1s;
+    transform: scale(1.05);
+}
+
+a:active {
+    color:orange;
+}
+
+ul li:nth-child(n + 3) {
+    background-color: lightcoral;
+}

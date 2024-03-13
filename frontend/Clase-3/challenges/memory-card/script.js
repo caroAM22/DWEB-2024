@@ -6,9 +6,9 @@ const gameContainer = document.querySelector(".game-container");
 const result = document.getElementById("result");
 const controls = document.querySelector(".controls-container");
 let cards;
-let interval;
-let firstCard = false;
-let secondCard = false;
+let interval; // consultar el uso de setInterval
+let firstCard = null;
+let secondCard = null;
 
 //Items array
 const items = [
@@ -33,7 +33,7 @@ let seconds = 0,
 let movesCount = 0,
   winCount = 0;
 
-//For timer
+//Function for timer generator
 const timeGenerator = () => {
   seconds += 1;
   //minutes logic
@@ -47,13 +47,14 @@ const timeGenerator = () => {
   timeValue.innerHTML = `<span>Tiempo:</span>${minutesValue}:${secondsValue}`;
 };
 
-//For calculating moves
+//Function for counting moves
 const movesCounter = () => {
   movesCount += 1;
   moves.innerHTML = `<span>Pasos:</span>${movesCount}`;
 };
 
-//Pick random objects from the items array
+//YOUR CODE STARTS HERE
+//Function to choose four random cards
 const generateRandom = (size = 4) => {
   //temporary array
   let tempArray = [...items];
@@ -71,11 +72,13 @@ const generateRandom = (size = 4) => {
   return cardValues;
 };
 
+// Function to generate matrix for the game
+
 const matrixGenerator = (cardValues, size = 4) => {
   gameContainer.innerHTML = "";
   cardValues = [...cardValues, ...cardValues];
-  //simple shuffle
-  cardValues.sort(() => Math.random() - 0.5);
+  //simple shuffle, DO IT YOURSELF
+  //Your code here
   for (let i = 0; i < size * size; i++) {
     /*
         Create Cards
@@ -98,49 +101,26 @@ const matrixGenerator = (cardValues, size = 4) => {
   cards = document.querySelectorAll(".card-container");
   cards.forEach((card) => {
     card.addEventListener("click", () => {
-      //If selected card is not matched yet then only run (i.e already matched card when clicked would be ignored)
-      if (!card.classList.contains("matched")) {
-        //flip the cliked card
-        card.classList.add("flipped");
-        //if it is the firstcard (!firstCard since firstCard is initially false)
-        if (!firstCard) {
-          //so current card will become firstCard
-          firstCard = card;
-          //current cards value becomes firstCardValue
-          firstCardValue = card.getAttribute("data-card-value");
-        } else {
-          //increment moves since user selected second card
-          movesCounter();
-          //secondCard and value
-          secondCard = card;
-          let secondCardValue = card.getAttribute("data-card-value");
-          if (firstCardValue == secondCardValue) {
-            //if both cards match add matched class so these cards would beignored next time
-            firstCard.classList.add("matched");
-            secondCard.classList.add("matched");
-            //set firstCard to false since next card would be first now
-            firstCard = false;
-            //winCount increment as user found a correct match
-            winCount += 1;
-            //check if winCount ==half of cardValues
-            if (winCount == Math.floor(cardValues.length / 2)) {
-              result.innerHTML = `<h2>Ganaste SIIIUUUU</h2>
-            <h4>Pasos: ${movesCount}</h4>`;
-              stopGame();
-            }
-          } else {
-            //if the cards dont match
-            //flip the cards back to normal
-            let [tempFirst, tempSecond] = [firstCard, secondCard];
-            firstCard = false;
-            secondCard = false;
-            let delay = setTimeout(() => {
-              tempFirst.classList.remove("flipped");
-              tempSecond.classList.remove("flipped");
-            }, 900);
-          }
-        }
-      }
+      card.classList.add("flipped");
+      movesCounter();
+
+      //Your code starts here... This is the hard part of this code
+
+      //Logic Needed:
+      //1. We need to check if the first card is not already matched. We can do that with the class "matched"
+      //2. flip the card. If there are no first ones, asign that card as first card and get the value of the card
+      //HINT: The value is on the attribute data-card-value
+
+      //3 If there is a first card flipped, it should flipped the second card after anohter click and ALSO move the counter
+      //4. If two cards are flipped, code should compare their value
+      //4.1 If both cards have the same value, they're a match so the code should assign one winCount
+      //HINT: A card is match if it has the class matched
+      //HINT # 2: User wins if and only if It matches all the cards, how can you check that using the cardValues array?
+      //HINT # 3: If user wins, game must stop. Don't worry, you already have a named function for that below ;) ;)
+
+      //If the cards don't match, you should flipped them again. Do you see the class flipped ? Well after this you can't see it (like JOHN CEEENAAAA)
+
+      //Note: It would be nice if the flipped process would be 'delayed'
     });
   });
 };
@@ -150,13 +130,13 @@ startButton.addEventListener("click", () => {
   movesCount = 0;
   seconds = 0;
   minutes = 0;
-  //controls amd buttons visibility
+  //controls and buttons visibility
   controls.classList.add("hide");
   stopButton.classList.remove("hide");
   startButton.classList.add("hide");
-  //Start timer
-  interval = setInterval(timeGenerator, 1000);
-  //initial moves
+  //Function to to start the timer. Again, check setInterval
+  //Hint: You already have a function that checks the time each second, use it wisely
+  //YOUR CODE HERE
   moves.innerHTML = `<span>Pasos:</span> ${movesCount}`;
   initializer();
 });
@@ -168,7 +148,8 @@ stopButton.addEventListener(
     controls.classList.remove("hide");
     stopButton.classList.add("hide");
     startButton.classList.remove("hide");
-    clearInterval(interval);
+    // timer created with setInterVal needs to be cleared
+    //YOUR CODE HERE
   })
 );
 

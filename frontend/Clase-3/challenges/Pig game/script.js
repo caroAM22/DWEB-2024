@@ -1,7 +1,7 @@
 
 let score = [0 , 0];       //Global score
 let roundScore = 0;     //round score
-let current = 0;        //current player  
+let current = 0;        //current player  (0 or 1)
 let dice;
 let gameRunning = true;
 let animation = 0;
@@ -14,12 +14,14 @@ document.querySelector(".current-1").textContent = "0";
 
 
 document.getElementById("rotate").onclick = function(){
+    //roll the dice
     dice = Math.floor(Math.random()*6 + 1);
     
  if(gameRunning){    
-     
+     //get value of dice
     document.querySelector("#dice-img").src = "assets/dice-"+dice+".JPG";
     
+    //This is just for cool effects
     if(animation === 0){
       document.querySelector("#dice-img").classList.add("tada");
       document.querySelector("#dice-img").classList.remove('shake');
@@ -32,44 +34,33 @@ document.getElementById("rotate").onclick = function(){
         animation = 0;
         
     }
-    
-    if(dice !== 1){
-     roundScore +=  dice;
-     document.querySelector(".current-"+current).textContent = roundScore;
-    }
-    
-    else{
-        roundScore = 0;
-        document.querySelector(".current-"+current).textContent = 0 ;
-        document.querySelector(".player-0").classList.toggle("active");
-        document.querySelector(".player-1").classList.toggle("active");
-        current = 1 - current ;
-    }
+
+    //YOUR CODE HERE
+
+    //Here are the rules of pig game
+    //1. User rolls the dice
+    //2. If value is different from 1, User can roll again and obtain a bigger accumulated value in his round score
+    //or he could decided to hold and end turn
+    //3. If value is one, user lost his accumulated value and his turn.
+    //hint: toggle seems cool, don't you think? Only applies if user lost turn
+    //hint # 2: Current user is either 0 or 1
+
+    document.querySelector(".player-0").classList.toggle("active");
+    document.querySelector(".player-1").classList.toggle("active");
+    document.querySelector(".current-"+current).textContent = dice;
+    current = 1 - current;
  }
 }
 
 
 document.getElementById("hold").onclick = function(){
 
-  if(gameRunning){    
-    score[current] += + roundScore;
-    document.querySelector(".score-"+current).textContent = score[current] ;
-    
-    if(score[current] >= 100){
-        document.querySelector("#pl-"+current).innerHTML = "<h2 id='pl-'"+current+">WINNER "+"<i class='fas fa-cicle'>"+"</i></h2>";
-        gameRunning = false;
-    }
-    
-  else{    
-    document.querySelector(".player-0").classList.toggle("active");
-    document.querySelector(".player-1").classList.toggle("active");
-    document.querySelector(".current-"+current).textContent = 0 ;
-    current = 1-current ;
-    roundScore = 0;
-   }
-      
-  }
-    
+  //Your code here
+
+  //As long as the game is running, the score of the CURRENT USER should be accumulated if the usert holds
+  //this value should be visible in his score
+  //current user wins if his/her/their score is equal or more than 100. Afther this, game should be stopped
+
  }
 
 

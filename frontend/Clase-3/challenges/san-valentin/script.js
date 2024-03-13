@@ -4,17 +4,11 @@ const noBtn = document.querySelector('.no');
 const yesBtn = document.querySelector('.yes');
 
 noBtn.addEventListener('click', () => {
-    const fullWidth = window.innerWidth;
-    const fullHeight = window.innerHeight;
-
-    const buttonWidth = noBtn.offsetWidth;
-    const buttonHeight = noBtn.offsetHeight;
-
-    const randx = Math.floor(Math.random() * (fullWidth - buttonWidth));
-    const randy = Math.floor(Math.random() * (fullHeight - buttonHeight));
-
-    noBtn.style.left = randx + 'px';
-    noBtn.style.top = randy + 'px';
+    //RANDOM POSITIONIN OF THE noBTn
+    //HINT # 1: window has properties of the width and height of the screen
+    //HINT # 2: offsetWidth and offsetHeight are properties of html elements
+    //HINT # 3: This button has position 'absolute', which means that its position in the html document could
+    //be given by the style properties left and top (in px values)
 });
 
 yesBtn.addEventListener('click', () => {

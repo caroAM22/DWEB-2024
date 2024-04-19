@@ -79,6 +79,7 @@ const matrixGenerator = (cardValues, size = 4) => {
   cardValues = [...cardValues, ...cardValues];
   //simple shuffle, DO IT YOURSELF
   //Your code here
+  shuffleArray(cardValues);
   for (let i = 0; i < size * size; i++) {
     /*
         Create Cards
@@ -101,28 +102,63 @@ const matrixGenerator = (cardValues, size = 4) => {
   cards = document.querySelectorAll(".card-container");
   cards.forEach((card) => {
     card.addEventListener("click", () => {
-      card.classList.add("flipped");
-      movesCounter();
+      if (!card.classList.contains("matched")) {
+        const flippedCards = document.querySelectorAll(
+          ".flipped:not(.matched)"
+        );
+        if (flippedCards.length < 2) {
+          card.classList.add("flipped");
 
-      //Your code starts here... This is the hard part of this code
+          const newFlippedCards = document.querySelectorAll(
+            ".flipped:not(.matched)"
+          );
+          if (newFlippedCards.length === 2) {
+            cards.forEach((c) => {
+              c.style.pointerEvents = "none";
+            });
 
-      //Logic Needed:
-      //1. We need to check if the first card is not already matched. We can do that with the class "matched"
-      //2. flip the card. If there are no first ones, asign that card as first card and get the value of the card
-      //HINT: The value is on the attribute data-card-value
+            setTimeout(() => {
+              const [firstCard, secondCard] = newFlippedCards;
+              const value1 = firstCard.getAttribute("data-card-value");
+              const value2 = secondCard.getAttribute("data-card-value");
 
-      //3 If there is a first card flipped, it should flipped the second card after anohter click and ALSO move the counter
-      //4. If two cards are flipped, code should compare their value
-      //4.1 If both cards have the same value, they're a match so the code should assign one winCount
-      //HINT: A card is match if it has the class matched
-      //HINT # 2: User wins if and only if It matches all the cards, how can you check that using the cardValues array?
-      //HINT # 3: If user wins, game must stop. Don't worry, you already have a named function for that below ;) ;)
+              movesCounter();
+              moves.innerHTML = `<span>Pasos:</span> ${movesCount}`;
 
-      //If the cards don't match, you should flipped them again. Do you see the class flipped ? Well after this you can't see it (like JOHN CEEENAAAA)
+              if (value1 === value2) {
+                newFlippedCards.forEach((c) => {
+                  c.classList.add("matched");
+                });
+                winCount++;
 
-      //Note: It would be nice if the flipped process would be 'delayed'
+                if (winCount === cardValues.length / 2) {
+                  result.innerHTML = "<h2>¡Has Ganado!</h2>";
+                  result.innerHTML += `<h4>Pasos: ${movesCount}</h4>`;
+                  result.innerHTML += `Tiempo: ${minutes}:${seconds}`;
+                  stopGame();
+                }
+              } else {
+                newFlippedCards.forEach((c) => {
+                  c.classList.remove("flipped");
+                });
+              }
+
+              cards.forEach((c) => {
+                c.style.pointerEvents = "auto";
+              });
+            }, 1000);
+          }
+        }
+      }
     });
   });
+};
+
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 };
 
 //Start game
@@ -137,6 +173,7 @@ startButton.addEventListener("click", () => {
   //Function to to start the timer. Again, check setInterval
   //Hint: You already have a function that checks the time each second, use it wisely
   //YOUR CODE HERE
+  interval = setInterval(timeGenerator, 1000);
   moves.innerHTML = `<span>Pasos:</span> ${movesCount}`;
   initializer();
 });
@@ -150,6 +187,7 @@ stopButton.addEventListener(
     startButton.classList.remove("hide");
     // timer created with setInterVal needs to be cleared
     //YOUR CODE HERE
+    clearInterval(interval);
   })
 );
 
